@@ -37,6 +37,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.customers.index') }}">Customers</a>
                             </li>
+                        @elseif (auth()->user() && auth()->user()->role == 'employee')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('employee.customers.index') }}">Employees</a>
+                            </li>
                         @endif
                     </ul>
 
