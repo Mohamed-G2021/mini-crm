@@ -25,8 +25,8 @@
                 <tr>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->email }}</td>
-                    <td>{{ $employee->created_at->format('Y-m-d') }}</td>
-                    <td>{{ $employee->updated_at->format('Y-m-d') }}</td>
+                    <td>{{ $employee->created_at }}</td>
+                    <td>{{ $employee->updated_at }}</td>
                     <td>
                         <a href="{{ route('admin.employees.edit', $employee->id) }}" class="btn btn-sm btn-secondary">Edit</a>
                         <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="POST" style="display:inline;">
