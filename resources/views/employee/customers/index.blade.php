@@ -19,6 +19,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Last Action</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th>Actions</th>
@@ -30,9 +31,23 @@
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone }}</td>
+                <td>
+                    @php $lastAction = $customer->actions()->latest()->first(); @endphp
+                    @if($lastAction)
+                        <div class="text-muted small">
+                            <strong>{{ ucfirst($lastAction->type) }}</strong> -
+                            {{ $lastAction->created_at->format('Y-m-d') }}<br>
+                            {{ Str::limit($lastAction->result, 40) }}
+                        </div>
+                    @else
+                        <div class="text-muted small">No actions yet</div>
+                    @endif
+                </td>
                 <td>{{ $customer->created_at }}</td>
                 <td>{{ $customer->updated_at }}</td>
                 <td>
+                    <a href="{{ route('employee.actions.index', $customer->id) }}" class="btn btn-sm btn-info">View Actions</a>
+                    <a href="{{ route('employee.actions.create', $customer->id) }}" class="btn btn-sm btn-info">Add Action</a>
                     <a href="{{ route('employee.customers.edit', $customer->id) }}" class="btn btn-sm btn-secondary">Edit</a>
                     <form method="POST" action="{{ route('employee.customers.destroy', $customer->id) }}" style="display:inline;" onsubmit="return confirm('Delete?')">
                         @csrf @method('DELETE')

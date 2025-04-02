@@ -42,7 +42,7 @@ class CustomerController extends Controller
     public function update(UpdateCustomerRequest $request, $id)
     {
         $customer = Customer::findOrFail($id);
-        $this->customerService->update($customer, $request->validated());
+        $this->customerService->update($customer, $request->validated(), $request->assigned_to);
         return redirect()->route('admin.customers.index')->with('success', 'Customer updated.');
     }
 

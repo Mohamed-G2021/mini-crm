@@ -16,7 +16,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::where('created_by', Auth::id())->latest()->get();
+        $customers = Customer::with('actions')->where('created_by', Auth::id())->latest()->get();
         return view('employee.customers.index', compact('customers'));
     }
 
@@ -27,7 +27,7 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request)
     {
-        $this->customerService->create($request->validated(), Auth::user());
+        $this->customerService->create($request->validated(), Auth::user(), Auth::id());
         return redirect()->route('employee.customers.index')->with('success', 'Customer added.');
     }
 

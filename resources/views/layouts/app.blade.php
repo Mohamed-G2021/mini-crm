@@ -39,7 +39,7 @@
                             </li>
                         @elseif (auth()->user() && auth()->user()->role == 'employee')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('employee.customers.index') }}">Employees</a>
+                                <a class="nav-link" href="{{ route('employee.customers.index') }}">Customers</a>
                             </li>
                         @endif
                     </ul>
